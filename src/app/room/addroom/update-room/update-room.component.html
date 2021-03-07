@@ -1,4 +1,4 @@
-<form [formGroup]="updateRoomForm" *ngIf="updateRoomForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="updateRoomForm" *ngIf="updateRoomForm" (ngSubmit)="onSubmitUpdateRoom()">
     <div class="form-group">
         <label for="id">Room No</label>
         <div class="input-group">
@@ -19,6 +19,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-    <button type="button" class="btn btn-danger">Clear</button>
+    <button type="submit" class="btn btn-success float-right">Submit</button>
 </form>

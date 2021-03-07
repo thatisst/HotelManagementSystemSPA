@@ -1,3 +1,4 @@
+import { Room } from './../../shared/models/room';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -9,7 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
   private headers!: HttpHeaders
-  constructor(protected http: HttpClient) { }
+
+  // room! : Room;
+
+  constructor(protected http: HttpClient) {
+    // this.room.rtCode = 3;
+    // this.room.status = true;
+   }
 
   listAll(path: string): Observable<any[]> {
     return this.http.get(`${environment.apiUrl}${path}`).pipe(
@@ -17,11 +24,12 @@ export class ApiService {
     )
   }
 
+
   create(path: string, resource: any, options?: HttpHeaders): Observable<any> {
     return this.http
       .post(`${environment.apiUrl}${path}`, resource, { headers: this.headers })
       .pipe(
-        map((response: any) => response),
+        map(response => response),
         catchError(this.handleError)
       )
   }
@@ -30,6 +38,7 @@ export class ApiService {
     return this.http
       .put(
         `${environment.apiUrl}${path}` + '/' + resource.id,
+        // `${environment.apiUrl}${path}`,
         JSON.stringify({ isRead: true })
       )
       .pipe(
@@ -82,9 +91,9 @@ export class ApiService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.log(error.error.errorMessage);
+      console.log(error.error?.errorMessage as any);
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.message}`
+        `Backend returned code ${error.status}, ` + `body was: ${error?.message}`
       );
     }
     // return an observable with a user-facing error message

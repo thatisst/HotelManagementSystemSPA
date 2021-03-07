@@ -34,11 +34,11 @@ export class UpdateRoomComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.buildForm();
+    this.buildFormUpdateRoom();
   }
 
   
-  buildForm() {
+  buildFormUpdateRoom() {
     // this.updateRoomForm = this.fb.group({
     //   id: ['5', Validators.required],
     //   rtCode: ['3', Validators.required],
@@ -52,7 +52,7 @@ export class UpdateRoomComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmitUpdateRoom() {
     console.log(this.updateRoomForm)
     this.roomService.updateRoom(this.updateRoomForm.value);
   }

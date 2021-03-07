@@ -21,10 +21,7 @@ export class AddRoomComponent implements OnInit {
   faPlus = faPlus;
 
   addedRoomForm!: FormGroup;
-  submitted = false;
 
-  // addedRoom!: Room;
-  returnUrl!: string;
 
   constructor(private modalService: NgbModal
     , private fb: FormBuilder

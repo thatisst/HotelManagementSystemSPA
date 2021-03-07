@@ -1,40 +1,168 @@
 <div class="container-fluid">
-    <div>
-      <table class="table table-hover my-5 mx-5">
-        <thead>
-          <tr>
-            <th scope="col">Service No</th>
-            <th scope="col">Room No</th>
-            <th scope="col">Description</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Service Date</th>
-            <th scope="col">Actions
-              <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
+  <div>
+    <table class="table table-hover my-5 mx-5">
+      <thead>
+        <tr>
+          <th scope="col">Service No</th>
+          <th scope="col">Room No</th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Service Date</th>
+          <th scope="col">Actions
+            <!-- ng-bootstrap -->
+            <ng-template #addservice let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Add Service</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="addedServiceForm" *ngIf="addedServiceForm" (ngSubmit)="onSubmitAddService()">
+                  <div class="form-group">
+                    <label for="roomNo">Service No</label>
+                    <div class="input-group">
+                      <input type="number" id="roomNo" class="form-control" formControlName="roomNo">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sDesc">Description</label>
+                    <div class="input-group">
+                      <input type="text" id="sDesc" class="form-control" formControlName="sDesc">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <div class="input-group">
+                      <input type="number" id="amount" class="form-control" formControlName="amount">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="serviceDate">Service Date</label>
+                    <div class="input-group">
+                      <input type="date" id="serviceDate" class="form-control" formControlName="serviceDate">
+                    </div>
+                  </div>
+                  <pre>Note: Service No is auto generated</pre>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-success" (click)="open(addservice)">
+              Add <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
                 Add <fa-icon [icon]="faPlus"></fa-icon>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-  
-          <tr *ngFor="let service of services">
-            <th scope="row">{{service.id}}</th>
-            <td>{{service.roomNo}}</td>
-            <td>{{service.sDesc}}</td>
-            <td>$ {{service.amount}}</td>
-            <td>{{service.serviceDate}}</td>
-            
-            <td>
-  
-              <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
-                Update <fa-icon [icon]="faEdit"></fa-icon>
-              </a>
-              <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
-                Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              </a> -->
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let service of services">
+          <th scope="row">{{service.id}}</th>
+          <td>{{service.roomNo}}</td>
+          <td>{{service.sDesc}}</td>
+          <td>$ {{service.amount}}</td>
+          <td>{{service.serviceDate}}</td>
+
+          <td>
+            <!-- ng-bootstrap -->
+            <ng-template #updateservice let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Update Service</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="updatedServiceForm" *ngIf="updatedServiceForm" (ngSubmit)="onSubmitUpdateService()">
+                  <div class="form-group">
+                    <label for="id">Service No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="roomNo">Room No</label>
+                    <div class="input-group">
+                      <input type="number" id="roomNo" class="form-control" formControlName="roomNo">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sDesc">Description</label>
+                    <div class="input-group">
+                      <input type="text" id="sDesc" class="form-control" formControlName="sDesc">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <div class="input-group">
+                      <input type="number" id="amount" class="form-control" formControlName="amount">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="serviceDate">Service Date</label>
+                    <div class="input-group">
+                      <input type="date" id="serviceDate" class="form-control" formControlName="serviceDate">
+                    </div>
+                  </div>
+                  <pre>Note: Service No is required</pre>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-primary" (click)="open(updateservice)">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </a> -->
+
+            <!-- ng-bootstrap -->
+            <ng-template #deleteservice let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Delete Service</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-delete-room></app-delete-room> -->
+                <form [formGroup]="deletedServiceForm" *ngIf="deletedServiceForm" (ngSubmit)="onSubmitDeleteService()">
+                  <div class="form-group">
+                    <label for="id">Service No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-danger ml-2" (click)="open(deleteservice)">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>

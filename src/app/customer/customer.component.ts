@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Customer } from '../shared/models/customer';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -15,11 +16,15 @@ export class CustomerComponent implements OnInit {
   faPlus = faPlus;
 
   closeResult = '';
-
   customers: Customer[] = [];
+  addedCustomerForm!: FormGroup;
+  updatedCustomerForm!: FormGroup;
+  deletedCustomerForm!: FormGroup;
 
   constructor(private customerService : CustomerService
-    , private modalService: NgbModal) { }
+    , private modalService: NgbModal
+    , private fb: FormBuilder
+    ) { }
 
   ngOnInit(): void {
     this.customerService.listAllCustomers().subscribe(
@@ -27,7 +32,64 @@ export class CustomerComponent implements OnInit {
         this.customers = r;
       }
     )
+    this.buildFormAddCustomer();
+    this.buildFormUpdateCustomer();
+    this.buildFormDeleteCustomer();
   }
+
+
+  buildFormAddCustomer() {
+    this.addedCustomerForm = this.fb.group({
+      // id: ['', Validators.nullValidator],
+      roomNo: ['', Validators.required],
+      cName: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      checkin: ['', Validators.required],
+      totalPersons: ['', Validators.required],
+      bookingDays: ['', Validators.required],
+      advance: ['', Validators.required]
+    });
+  }
+
+  onSubmitAddCustomer() {
+    console.log(this.addedCustomerForm)
+    this.customerService.addCustomer(this.addedCustomerForm.value);
+  }
+
+
+  buildFormUpdateCustomer() {
+    this.updatedCustomerForm = this.fb.group({
+      id: ['', Validators.nullValidator],
+      roomNo: ['', Validators.required],
+      cName: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+      checkin: ['', Validators.required],
+      totalPersons: ['', Validators.required],
+      bookingDays: ['', Validators.required],
+      advance: ['', Validators.required]
+    });
+  }
+
+  onSubmitUpdateCustomer() {
+    console.log(this.updatedCustomerForm)
+    this.customerService.updateCustomer(this.updatedCustomerForm.value);
+  }
+
+  buildFormDeleteCustomer() {
+    this.deletedCustomerForm = this.fb.group({
+      id: ['', Validators.nullValidator]
+    });
+  }
+
+  onSubmitDeleteCustomer() {
+    console.log(this.deletedCustomerForm)
+    this.customerService.deleteCustomer(this.deletedCustomerForm.value);
+  }
+
 
 
   open(content: any) {

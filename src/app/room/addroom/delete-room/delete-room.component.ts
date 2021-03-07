@@ -19,9 +19,6 @@ export class DeleteRoomComponent implements OnInit {
   faPlus = faPlus;
 
   deletedRoomForm!: FormGroup;
-  submitted = false;
-
-  returnUrl!: string;
 
   constructor(private modalService: NgbModal
     , private fb: FormBuilder
@@ -32,10 +29,10 @@ export class DeleteRoomComponent implements OnInit {
   get f() { return this.deletedRoomForm.controls; }
 
   ngOnInit(): void {
-    this.buildForm();
+    this.buildFormDeleteForm();
   }
 
-  buildForm() {
+  buildFormDeleteForm() {
     this.deletedRoomForm = this.fb.group({
       id: ['5', Validators.nullValidator]
       // ,
@@ -44,7 +41,7 @@ export class DeleteRoomComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmitDeleteRoom() {
     console.log(this.deletedRoomForm)
     this.roomService.deleteRoom(this.deletedRoomForm.value);
   }

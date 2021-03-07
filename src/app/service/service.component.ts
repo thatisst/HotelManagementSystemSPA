@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Service } from '../shared/models/service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-service',
@@ -16,18 +17,68 @@ export class ServiceComponent implements OnInit {
   faPlus = faPlus;
 
   closeResult = '';
-
   services: Service[] = [];
+  addedServiceForm!: FormGroup;
+  updatedServiceForm!: FormGroup;
+  deletedServiceForm!: FormGroup;
 
   constructor(private serviceService : ServiceService
-    , private modalService: NgbModal) { }
+    , private modalService: NgbModal
+    , private fb: FormBuilder
+    ) { }
 
   ngOnInit(): void {
     this.serviceService.listAllServices().subscribe(
       r => {
         this.services = r;
       }
-    )
+    );
+    this.buildFormAddService();
+    this.buildFormUpdateService();
+    this.buildFormDeleteService();
+
+  }
+
+  buildFormAddService() {
+    this.addedServiceForm = this.fb.group({
+      // id: ['', Validators.nullValidator],
+      roomNo: ['', Validators.required],
+      sDesc: ['', Validators.required],
+      amount: ['', Validators.required],
+      serviceDate: ['', Validators.required]
+    });
+  }
+
+  onSubmitAddService() {
+    console.log(this.addedServiceForm)
+    this.serviceService.addService(this.addedServiceForm.value);
+  }
+
+
+  buildFormUpdateService() {
+    this.updatedServiceForm = this.fb.group({
+      id: ['', Validators.nullValidator],
+      roomNo: ['', Validators.required],
+      sDesc: ['', Validators.required],
+      amount: ['', Validators.required],
+      serviceDate: ['', Validators.required]
+    });
+  }
+
+  onSubmitUpdateService() {
+    console.log(this.updatedServiceForm)
+    this.serviceService.updateService(this.updatedServiceForm.value);
+  }
+
+  buildFormDeleteService() {
+    this.deletedServiceForm = this.fb.group({
+      id: ['', Validators.nullValidator]
+    });
+  }
+
+  onSubmitDeleteService() {
+    console.log(this.deletedServiceForm)
+    this.serviceService.deleteService(this.deletedServiceForm.value);
   }
 
 

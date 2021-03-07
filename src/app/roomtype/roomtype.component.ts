@@ -3,6 +3,7 @@ import { RoomType } from './../shared/models/roomtype';
 import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-roomtype',
@@ -15,19 +16,67 @@ export class RoomtypeComponent implements OnInit {
   faPlus = faPlus;
 
   closeResult = '';
-
   roomTypes: RoomType[] = [];
+  addedRoomTypeForm!: FormGroup;
+  updatedRoomTypeForm!: FormGroup;
+  deletedRoomTypeForm!: FormGroup;
 
-  constructor(private roomTypesService : RoomtypeService
-    , private modalService: NgbModal) { }
+  constructor(private roomTypeService : RoomtypeService
+    , private modalService: NgbModal
+    , private fb: FormBuilder
+    ) { }
 
   ngOnInit(): void {
-    this.roomTypesService.listAllRoomTypes().subscribe(
+    this.roomTypeService.listAllRoomTypes().subscribe(
       r => {
         this.roomTypes = r;
       }
-    )
+    );
+    this.buildFormAddRoomType();
+    this.buildFormUpdateRoomType();
+    this.buildFormDeleteRoomType();
   }
+
+
+  buildFormAddRoomType() {
+    this.addedRoomTypeForm = this.fb.group({
+      // id: ['', Validators.nullValidator],
+      rtDesc: ['', Validators.required],
+      rent: ['', Validators.required]
+    });
+  }
+
+  onSubmitAddRoomType() {
+    console.log(this.addedRoomTypeForm)
+    this.roomTypeService.addRoomType(this.addedRoomTypeForm.value);
+  }
+
+
+  buildFormUpdateRoomType() {
+    this.updatedRoomTypeForm = this.fb.group({
+      id: ['', Validators.nullValidator],
+      rtDesc: ['', Validators.required],
+      rent: ['', Validators.required]
+    });
+  }
+
+  onSubmitUpdateRoomType() {
+    console.log(this.updatedRoomTypeForm)
+    this.roomTypeService.updateRoomType(this.updatedRoomTypeForm.value);
+  }
+
+  buildFormDeleteRoomType() {
+    this.deletedRoomTypeForm = this.fb.group({
+      id: ['', Validators.nullValidator]
+    });
+  }
+
+  onSubmitDeleteRoomType() {
+    console.log(this.deletedRoomTypeForm)
+    this.roomTypeService.deleteRoomType(this.deletedRoomTypeForm.value);
+  }
+
+
 
 
   open(content: any) {

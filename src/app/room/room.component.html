@@ -17,7 +17,23 @@
                 </button>
               </div>
               <div class="modal-body">
-                <app-add-room></app-add-room>
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="addedRoomForm" *ngIf="addedRoomForm" (ngSubmit)="onSubmitAddRoom()">
+                  <div class="form-group">
+                    <label for="rtCode">Room Type Code</label>
+                    <div class="input-group">
+                      <input type="number" id="rtCode" class="form-control" formControlName="rtCode">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <div class="input-group">
+                      <p>Available:</p> <input type="checkbox" id="status" class="form-control float-left" formControlName="status">
+                    </div>
+                  </div>
+                  <pre>Note: Room No is auto generated</pre>
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
@@ -27,9 +43,6 @@
             <button class="btn btn-sm btn-outline-success" (click)="open(addroom)">
               Add <fa-icon [icon]="faPlus"></fa-icon>
             </button>
-            <!-- <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
-              Add <fa-icon [icon]="faPlus"></fa-icon>
-            </a> -->
           </th>
         </tr>
       </thead>
@@ -53,10 +66,32 @@
                 </button>
               </div>
               <div class="modal-body">
-                <app-update-room></app-update-room>
+                <!-- <app-update-room></app-update-room> -->
+                <form [formGroup]="updateRoomForm" *ngIf="updateRoomForm" (ngSubmit)="onSubmitUpdateRoom()">
+                  <div class="form-group">
+                    <label for="id">Room No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="rtCode">Room Type Code</label>
+                    <div class="input-group">
+                      <input type="number" id="rtCode" class="form-control" formControlName="rtCode">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <div class="input-group">
+                      <p>Available:</p><input type="checkbox" id="status" class="form-control" formControlName="status">
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
               </div>
             </ng-template>
@@ -65,10 +100,6 @@
               Update <fa-icon [icon]="faEdit"></fa-icon>
             </button>
 
-
-            <!-- <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
-              Update <fa-icon [icon]="faEdit"></fa-icon>
-            </a> -->
 
             <!-- ng-bootstrap -->
             <ng-template #deleteroom let-modal>
@@ -79,10 +110,19 @@
                 </button>
               </div>
               <div class="modal-body">
-                <app-delete-room></app-delete-room>
+                <!-- <app-delete-room></app-delete-room> -->
+                <form [formGroup]="deletedRoomForm" *ngIf="deletedRoomForm" (ngSubmit)="onSubmitDeleteRoom()">
+                  <div class="form-group">
+                    <label for="id">Room No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
               </div>
             </ng-template>
@@ -91,14 +131,7 @@
               Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
             </button>
 
-            <!-- <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
-              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
-            </a> -->
 
-            <!-- 
-            <button class="btn btn-sm btn-outline-danger ml-2">
-              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
-            </button> -->
           </td>
         </tr>
       </tbody>

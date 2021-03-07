@@ -1,36 +1,153 @@
 <div class="container-fluid">
-    <div>
-      <table class="table table-hover my-5 mx-5">
-        <thead>
-          <tr>
-            <th scope="col">Room Type No</th>
-            <th scope="col">Description</th>
-            <th scope="col">Rent</th>
-            <!-- <th scope="col">Available Rooms</th> -->
-            <th scope="col">Actions
-              <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
-                Add <fa-icon [icon]="faPlus"></fa-icon>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-  
-          <tr *ngFor="let roomType of roomTypes">
-            <th scope="row">{{roomType.id}}</th>
-            <td>{{roomType.rtDesc}}</td>
-            <td>${{roomType.rent}}</td>
+  <div>
+    <table class="table table-hover my-5 mx-5">
+      <thead>
+        <tr>
+          <th scope="col">Room Type No</th>
+          <th scope="col">Description</th>
+          <th scope="col">Rent</th>
+          <!-- <th scope="col">Available Rooms</th> -->
+          <th scope="col">Actions
+            <!-- ng-bootstrap -->
+            <ng-template #addroomtype let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Add Room Type</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="addedRoomTypeForm" *ngIf="addedRoomTypeForm" (ngSubmit)="onSubmitAddRoomType()">
+                  <div class="form-group">
+                    <label for="id">Room Type No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rtDesc">Description</label>
+                    <div class="input-group">
+                      <input type="text" id="rtDesc" class="form-control" formControlName="rtDesc">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rent">Rent</label>
+                    <div class="input-group">
+                      <input type="number" id="rent" class="form-control" formControlName="rent">
+                    </div>
+                  </div>
+                  <pre>Note: Room Type No is auto generated</pre>
 
-            <td> 
-              <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
-                Update <fa-icon [icon]="faEdit"></fa-icon>
-              </a>
-              <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
-                Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-success" (click)="open(addroomtype)">
+              Add <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
+                Add <fa-icon [icon]="faPlus"></fa-icon>
+              </a> -->
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let roomType of roomTypes">
+          <th scope="row">{{roomType.id}}</th>
+          <td>{{roomType.rtDesc}}</td>
+          <td>${{roomType.rent}}</td>
+
+          <td>
+            <!-- ng-bootstrap -->
+            <ng-template #updateroomtype let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Update Room Type</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="updatedRoomTypeForm" *ngIf="updatedRoomTypeForm"
+                  (ngSubmit)="onSubmitUpdateRoomType()">
+                  <div class="form-group">
+                    <label for="id">Room Type No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rtDesc">Description</label>
+                    <div class="input-group">
+                      <input type="text" id="rtDesc" class="form-control" formControlName="rtDesc">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="rent">Rent</label>
+                    <div class="input-group">
+                      <input type="number" id="rent" class="form-control" formControlName="rent">
+                    </div>
+                  </div>
+                  <pre>Note: Room Type No is required</pre>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-primary" (click)="open(updateroomtype)">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </a> -->
+
+            <!-- ng-bootstrap -->
+            <ng-template #deleteroomtype let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Delete Room Type</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- <app-add-room></app-add-room> -->
+                <form [formGroup]="deletedRoomTypeForm" *ngIf="deletedRoomTypeForm"
+                  (ngSubmit)="onSubmitDeleteRoomType()">
+                  <div class="form-group">
+                    <label for="id">Room Type No</label>
+                    <div class="input-group">
+                      <input type="number" id="id" class="form-control" formControlName="id">
+                    </div>
+                  </div>         
+                  <pre>Note: Room Type No is required</pre>
+
+                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-danger ml-2" (click)="open(deleteroomtype)">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </a> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
