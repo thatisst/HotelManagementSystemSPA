@@ -1,4 +1,4 @@
-<form [formGroup]="addedRoomForm" *ngIf="addedRoomForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="addedRoomForm" *ngIf="addedRoomForm" (ngSubmit)="onSubmitAddRoom()">
     <div class="form-group">
         <label for="rtCode">Room Type Code</label>
         <div class="input-group">
@@ -11,7 +11,11 @@
             <input type="" id="status" class="form-control" formControlName="status">
         </div>
     </div>
+    <pre>
+        Note: Room No is auto generated in database; 
+        Status = "true" - room is available; 
+        Status = "false" - room is occupied
+    </pre>
 
-    <button type="submit" class="btn btn-success">Submit</button>
-    <button type="button" class="btn btn-danger">Clear</button>
+    <button type="submit" class="btn btn-success float-right">Submit</button>
 </form>

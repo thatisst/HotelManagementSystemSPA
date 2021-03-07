@@ -9,11 +9,11 @@
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
             <th scope="col">Room No</th>
-            <th scope="col">Room Type</th>
             <th scope="col">TotalPersons</th>
             <th scope="col">BookingDays</th>
             <th scope="col">Checkin Date</th>
             <th scope="col">Advance</th>
+            <th scope="col">Room Type</th>
             <th scope="col">Actions
               <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
                 Add <fa-icon [icon]="faPlus"></fa-icon>
@@ -30,11 +30,12 @@
             <td>{{customer.phone}}</td>
             <td>{{customer.email}}</td>
             <td>{{customer.roomNo}}</td>
-            <td>{{customer.roomRypeDesc}}</td>
             <td>{{customer.totalPersons}}</td>
             <td>{{customer.bookingDays}}</td>
             <td>{{customer.checkin}}</td>
             <td>${{customer.advance}}</td>
+            <td>{{customer.roomRypeDesc}}</td>
+
 
             <td>
               <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">

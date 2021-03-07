@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { Room } from '../shared/models/room';
 import { RoomService } from '../core/services/room.service';
 import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +20,9 @@ export class RoomComponent implements OnInit {
 
   rooms: Room[] = [];
 
+  @Input()
+  addedRoomForm!: FormGroup;
+
   constructor(private roomService : RoomService
     , private modalService: NgbModal) { }
 
@@ -28,6 +32,11 @@ export class RoomComponent implements OnInit {
         this.rooms = r;
       }
     )
+  }
+
+  onSubmitAddRoom() {
+    console.log(this.addedRoomForm)
+    this.roomService.addRoom(this.addedRoomForm.value);
   }
 
 

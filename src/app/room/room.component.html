@@ -9,7 +9,7 @@
           <th scope="col">Availability</th>
           <th scope="col">Actions
             <!-- ng-bootstrap -->
-            <ng-template #content let-modal>
+            <ng-template #addroom let-modal>
               <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">Add Room</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -20,12 +20,11 @@
                 <app-add-room></app-add-room>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
               </div>
             </ng-template>
 
-            <button class="btn btn-sm btn-outline-primary" (click)="open(content)">
+            <button class="btn btn-sm btn-outline-success" (click)="open(addroom)">
               Add <fa-icon [icon]="faPlus"></fa-icon>
             </button>
             <!-- <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
@@ -46,7 +45,7 @@
           </td>
           <td>
             <!-- ng-bootstrap -->
-            <ng-template #content let-modal>
+            <ng-template #updateroom let-modal>
               <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">Update Room</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -62,7 +61,7 @@
               </div>
             </ng-template>
 
-            <button class="btn btn-sm btn-outline-success" (click)="open(content)">
+            <button class="btn btn-sm btn-outline-primary" (click)="open(updateroom)">
               Update <fa-icon [icon]="faEdit"></fa-icon>
             </button>
 
@@ -72,7 +71,7 @@
             </a> -->
 
             <!-- ng-bootstrap -->
-            <ng-template #content let-modal>
+            <ng-template #deleteroom let-modal>
               <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title">Delete Room</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -88,9 +87,13 @@
               </div>
             </ng-template>
 
-            <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+            <button class="btn btn-sm btn-outline-danger ml-2" (click)="open(deleteroom)">
               Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
-            </a>
+            </button>
+
+            <!-- <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </a> -->
 
             <!-- 
             <button class="btn btn-sm btn-outline-danger ml-2">

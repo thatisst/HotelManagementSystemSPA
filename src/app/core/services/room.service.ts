@@ -17,7 +17,7 @@ export class RoomService {
   }
 
   updateRoom(updatedRoom: Room): Observable<Room> {
-    return this.apiService.create('room/update', updatedRoom);
+    return this.apiService.update('room/update', updatedRoom);
   }
 
   addRoom(addedRoom: Room): Observable<Room> {
@@ -25,7 +25,7 @@ export class RoomService {
   }
 
   deleteRoom(id: number): Observable<Room> {
-    return this.apiService.create('room/delete', id);
+    return this.apiService.delete('room/delete', id);
   }
 
   listRoom(id: number): Observable<Room> {

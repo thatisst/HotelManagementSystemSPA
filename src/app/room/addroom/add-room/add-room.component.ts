@@ -40,14 +40,14 @@ export class AddRoomComponent implements OnInit {
 
   buildForm() {
     this.addedRoomForm = this.fb.group({
-      id: ['5', Validators.nullValidator],
+      // id: ['', Validators.nullValidator],
       rtCode: ['3', Validators.required],
       status: ['true', Validators.required]
 
     });
   }
 
-  onSubmit() {
+  onSubmitAddRoom() {
     console.log(this.addedRoomForm)
     this.roomService.addRoom(this.addedRoomForm.value);
   }

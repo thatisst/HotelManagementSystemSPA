@@ -13,7 +13,7 @@ export class ApiService {
 
   listAll(path: string): Observable<any[]> {
     return this.http.get(`${environment.apiUrl}${path}`).pipe(
-      map(response => response as any)
+      map((response: any) => response)
     )
   }
 
@@ -25,6 +25,26 @@ export class ApiService {
         catchError(this.handleError)
       )
   }
+
+  update(path: string, resource: any): Observable<any> {
+    return this.http
+      .put(
+        `${environment.apiUrl}${path}` + '/' + resource.id,
+        JSON.stringify({ isRead: true })
+      )
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
+  }
+
+  delete(path: string, id: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}${path}` + '/' + id).pipe(
+      map(response => response),
+      catchError(this.handleError)
+    );
+  }
+
 
   getOne(path: string, id?: number, queryParams?: Map<any, any>): Observable<any> {
     let getUrl: string;
