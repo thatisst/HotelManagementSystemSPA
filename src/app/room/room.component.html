@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div>
+    <table class="table table-hover my-5 mx-5">
+      <thead>
+        <tr>
+          <th scope="col">Room No</th>
+          <th scope="col">Type</th>
+          <th scope="col">Rent</th>
+          <th scope="col">Availability</th>
+          <th scope="col">Actions
+            <!-- ng-bootstrap -->
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Add Room</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-add-room></app-add-room>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-primary" (click)="open(content)">
+              Add <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <!-- <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
+              Add <fa-icon [icon]="faPlus"></fa-icon>
+            </a> -->
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let room of rooms">
+          <th scope="row">{{room.id}}</th>
+          <td>{{room.rtDesc}}</td>
+          <td>${{room.rent}}</td>
+          <td>
+            <div *ngIf="room.status==true">Available </div>
+            <p *ngIf="room.status==false"> -- </p>
+          </td>
+          <td>
+            <!-- ng-bootstrap -->
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Update Room</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-update-room></app-update-room>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-sm btn-outline-success" (click)="open(content)">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+
+
+            <!-- <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
+              Update <fa-icon [icon]="faEdit"></fa-icon>
+            </a> -->
+
+            <!-- ng-bootstrap -->
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Delete Room</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-delete-room></app-delete-room>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </a>
+
+            <!-- 
+            <button class="btn btn-sm btn-outline-danger ml-2">
+              Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

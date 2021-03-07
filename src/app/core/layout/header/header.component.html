@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Hotel Management System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto text-uppercase">
+  
+        <li class="nav-item">
+          <div ngbDropdown>
+            <a [routerLink]="['room']"
+            class="nav-link" style="cursor:pointer;" ngbDropdownToggle>Rooms</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+              <ul class="list-unstyled text-center ">
+                <li> <a [routerLink]="[ 'room/add']">Add</a> </li>
+                  <li> <a [routerLink]="[ 'room/update']">Update</a> </li>
+                  <li> <a [routerLink]="[ 'room/delete']">Delete</a> </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+            <div ngbDropdown>
+              <a [routerLink]="['roomtype']"
+              class="nav-link" style="cursor:pointer;" ngbDropdownToggle>Room Types</a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <ul class="list-unstyled text-center ">
+                  <li> <a [routerLink]="[ 'roomtype/add']">Add</a> </li>
+                  <li> <a [routerLink]="[ 'roomtype/update']">Update</a> </li>
+                  <li> <a [routerLink]="[ 'roomtype/delete']">Delete</a> </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div ngbDropdown>
+              <a [routerLink]="['customer']"
+              class="nav-link" style="cursor:pointer;" ngbDropdownToggle>Customers</a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <ul class="list-unstyled text-center ">
+                  <li> <a [routerLink]="[ 'customer/add']">Add</a> </li>
+                  <li> <a [routerLink]="[ 'customer/update']">Update</a> </li>
+                  <li> <a [routerLink]="[ 'customer/delete']">Delete</a> </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div ngbDropdown>
+              <a [routerLink]="['service']"
+              class="nav-link" style="cursor:pointer;" ngbDropdownToggle>Services</a>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <ul class="list-unstyled text-center ">
+                  <li> <a [routerLink]="[ 'service/add']">Add</a> </li>
+                  <li> <a [routerLink]="[ 'service/update']">Update</a> </li>
+                  <li> <a [routerLink]="[ 'service/delete']">Delete</a> </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        
+      </ul>
+      <!-- <app-search-movies></app-search-movies> -->
+    </div>
+  </nav>
+  

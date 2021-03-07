@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div>
+      <table class="table table-hover my-5 mx-5">
+        <thead>
+          <tr>
+            <th scope="col">Customer Id</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Room No</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">TotalPersons</th>
+            <th scope="col">BookingDays</th>
+            <th scope="col">Checkin Date</th>
+            <th scope="col">Advance</th>
+            <th scope="col">Actions
+              <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
+                Add <fa-icon [icon]="faPlus"></fa-icon>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let customer of customers">
+            <th scope="row">{{customer.id}}</th>
+            <td>{{customer.cName}}</td>
+            <td>{{customer.address}}</td>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{customer.roomNo}}</td>
+            <td>{{customer.roomRypeDesc}}</td>
+            <td>{{customer.totalPersons}}</td>
+            <td>{{customer.bookingDays}}</td>
+            <td>{{customer.checkin}}</td>
+            <td>${{customer.advance}}</td>
+
+            <td>
+              <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
+                Update <fa-icon [icon]="faEdit"></fa-icon>
+              </a>
+              <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+                Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

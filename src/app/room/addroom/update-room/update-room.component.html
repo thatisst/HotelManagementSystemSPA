@@ -1,0 +1,24 @@
+<form [formGroup]="updateRoomForm" *ngIf="updateRoomForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="id">Room No</label>
+        <div class="input-group">
+            <input type="number" id="id" class="form-control" formControlName="id">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="rtCode">Room Type Code</label>
+        <div class="input-group">
+            <input type="number" id="rtCode" class="form-control" formControlName="rtCode">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <div class="input-group">
+            <input type="" id="status" class="form-control" formControlName="status">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-danger">Clear</button>
+</form>

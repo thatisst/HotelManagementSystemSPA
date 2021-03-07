@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div>
+      <table class="table table-hover my-5 mx-5">
+        <thead>
+          <tr>
+            <th scope="col">Room Type No</th>
+            <th scope="col">Description</th>
+            <th scope="col">Rent</th>
+            <!-- <th scope="col">Available Rooms</th> -->
+            <th scope="col">Actions
+              <a [routerLink]="['add']" class="btn btn-sm btn-outline-primary ml-2">
+                Add <fa-icon [icon]="faPlus"></fa-icon>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let roomType of roomTypes">
+            <th scope="row">{{roomType.id}}</th>
+            <td>{{roomType.rtDesc}}</td>
+            <td>${{roomType.rent}}</td>
+
+            <td> 
+              <a [routerLink]="['update']" class="btn btn-sm btn-outline-success">
+                Update <fa-icon [icon]="faEdit"></fa-icon>
+              </a>
+              <a [routerLink]="['delete']" class="btn btn-sm btn-outline-danger ml-2">
+                Delete <fa-icon [icon]="faTrashAlt"></fa-icon>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
