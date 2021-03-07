@@ -17,7 +17,7 @@ export class ServiceService {
   }
 
   updateService(updatedRoomType: Service): Observable<Service> {
-    return this.apiService.create('service/update', updatedRoomType);
+    return this.apiService.update('service/update', updatedRoomType);
   }
 
   addService(addedService: Service): Observable<Service> {
@@ -25,6 +25,6 @@ export class ServiceService {
   }
 
   deleteService(id: number): Observable<Service> {
-    return this.apiService.create('service/delete', id);
+    return this.apiService.delete('service/delete', id);
   }
 }

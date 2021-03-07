@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-roomtype',
@@ -47,8 +48,15 @@ export class RoomtypeComponent implements OnInit {
   }
 
   onSubmitAddRoomType() {
-    console.log(this.addedRoomTypeForm)
-    this.roomTypeService.addRoomType(this.addedRoomTypeForm.value);
+    console.log(this.addedRoomTypeForm);
+    this.roomTypeService.addRoomType(this.addedRoomTypeForm.value).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
 
@@ -61,8 +69,15 @@ export class RoomtypeComponent implements OnInit {
   }
 
   onSubmitUpdateRoomType() {
-    console.log(this.updatedRoomTypeForm)
-    this.roomTypeService.updateRoomType(this.updatedRoomTypeForm.value);
+    console.log(this.updatedRoomTypeForm);
+    this.roomTypeService.updateRoomType(this.updatedRoomTypeForm.value).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
   buildFormDeleteRoomType() {
@@ -72,8 +87,15 @@ export class RoomtypeComponent implements OnInit {
   }
 
   onSubmitDeleteRoomType() {
-    console.log(this.deletedRoomTypeForm)
-    this.roomTypeService.deleteRoomType(this.deletedRoomTypeForm.value);
+    console.log(this.deletedRoomTypeForm);
+    this.roomTypeService.deleteRoomType(this.deletedRoomTypeForm.value['id']).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
 

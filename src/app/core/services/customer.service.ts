@@ -17,7 +17,7 @@ export class CustomerService {
   }
 
   updateCustomer(customer: Customer): Observable<Customer> {
-    return this.apiService.create('customer/update', customer);
+    return this.apiService.update('customer/update', customer);
   }
 
   addCustomer(customer: Customer): Observable<Customer> {
@@ -25,6 +25,6 @@ export class CustomerService {
   }
 
   deleteCustomer(id: number): Observable<Customer> {
-    return this.apiService.create('customer/delete', id);
+    return this.apiService.delete('customer/delete', id);
   }
 }

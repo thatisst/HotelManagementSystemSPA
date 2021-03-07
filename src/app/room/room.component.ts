@@ -41,17 +41,11 @@ export class RoomComponent implements OnInit {
 
   buildFormAddRoom() {
     this.addedRoomForm = this.fb.group({
-      // id: ['', Validators.nullValidator],
-      // rtCode: ['3', Validators.required],
-      // status: ['true', Validators.required]
       rtCode: ['3'],
       status: ['true']
 
     });
   }
-
-    // convenience getter for easy access to form fields
-    get f() { return this.deletedRoomForm.controls; }
 
 
   onSubmitAddRoom() {
@@ -59,7 +53,6 @@ export class RoomComponent implements OnInit {
     this.roomService.addRoom(this.addedRoomForm.value).subscribe(
       (res) =>{
         console.log(res);
-        // this.onClose();
       } ,
       (err : HttpErrorResponse) => {
         console.log(err);
@@ -74,21 +67,13 @@ export class RoomComponent implements OnInit {
       rtCode: ['3'],
       status: ['']
     });
-
-    // });
-    // this.updateRoomForm = new FormGroup({
-    //   id: new FormControl(),
-    //   rtCode: new FormControl(),
-    //   status: new FormControl()
-    // });
   }
 
   onSubmitUpdateRoom() {
-    console.log(this.updateRoomForm)
+    console.log(this.updateRoomForm);
     this.roomService.updateRoom(this.updateRoomForm.value).subscribe(
       (res) =>{
         console.log(res);
-        // this.onClose();
       } ,
       (err : HttpErrorResponse) => {
         console.log(err);
@@ -99,9 +84,6 @@ export class RoomComponent implements OnInit {
   buildFormDeleteRoom() {
     this.deletedRoomForm = this.fb.group({
       id: ['5', Validators.nullValidator]
-      // ,
-      // rtCode: ['3', Validators.required],
-      // status: ['true', Validators.required]
     });
   }
 
@@ -110,7 +92,6 @@ export class RoomComponent implements OnInit {
     this.roomService.deleteRoom(this.deletedRoomForm.value['id']).subscribe(
       (res) =>{
         console.log(res);
-        // this.onClose();
       } ,
       (err : HttpErrorResponse) => {
         console.log(err);

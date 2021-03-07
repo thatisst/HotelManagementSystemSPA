@@ -4,6 +4,7 @@ import { faEdit, faTrashAlt, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Service } from '../shared/models/service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-service',
@@ -50,8 +51,15 @@ export class ServiceComponent implements OnInit {
   }
 
   onSubmitAddService() {
-    console.log(this.addedServiceForm)
-    this.serviceService.addService(this.addedServiceForm.value);
+    console.log(this.addedServiceForm);
+    this.serviceService.addService(this.addedServiceForm.value).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
 
@@ -66,8 +74,15 @@ export class ServiceComponent implements OnInit {
   }
 
   onSubmitUpdateService() {
-    console.log(this.updatedServiceForm)
-    this.serviceService.updateService(this.updatedServiceForm.value);
+    console.log(this.updatedServiceForm);
+    this.serviceService.updateService(this.updatedServiceForm.value).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
   buildFormDeleteService() {
@@ -77,8 +92,15 @@ export class ServiceComponent implements OnInit {
   }
 
   onSubmitDeleteService() {
-    console.log(this.deletedServiceForm)
-    this.serviceService.deleteService(this.deletedServiceForm.value);
+    console.log(this.deletedServiceForm);
+    this.serviceService.deleteService(this.deletedServiceForm.value['id']).subscribe(
+      (res) =>{
+        console.log(res);
+      } ,
+      (err : HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 
 
