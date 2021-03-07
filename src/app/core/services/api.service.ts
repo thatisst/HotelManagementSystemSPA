@@ -34,18 +34,19 @@ export class ApiService {
       )
   }
 
-  update(path: string, resource: any): Observable<any> {
+  update(path: string, resource: any, options?: HttpHeaders): Observable<any> {
     return this.http
       .put(
-        `${environment.apiUrl}${path}` + '/' + resource.id,
-        // `${environment.apiUrl}${path}`,
-        JSON.stringify({ isRead: true })
+        `${environment.apiUrl}${path}` + '/' + resource['id'],
+        JSON.stringify(resource),
+        { headers: { 'Content-Type': 'application/json' }  }
       )
       .pipe(
         map(response => response),
         catchError(this.handleError)
       );
   }
+
 
   delete(path: string, id: number): Observable<any> {
     return this.http.delete(`${environment.apiUrl}${path}` + '/' + id).pipe(

@@ -50,6 +50,10 @@ export class RoomComponent implements OnInit {
     });
   }
 
+    // convenience getter for easy access to form fields
+    get f() { return this.deletedRoomForm.controls; }
+
+
   onSubmitAddRoom() {
     console.log(this.addedRoomForm);
     this.roomService.addRoom(this.addedRoomForm.value).subscribe(
@@ -66,7 +70,7 @@ export class RoomComponent implements OnInit {
 
   buildFormUpdateRoom() {
     this.updateRoomForm = this.fb.group({
-      id: ['5'],
+      id: ['8'],
       rtCode: ['3'],
       status: ['']
     });
@@ -102,8 +106,8 @@ export class RoomComponent implements OnInit {
   }
 
   onSubmitDeleteRoom() {
-    console.log(this.deletedRoomForm)
-    this.roomService.deleteRoom(this.deletedRoomForm.value).subscribe(
+    console.log(this.deletedRoomForm);
+    this.roomService.deleteRoom(this.deletedRoomForm.value['id']).subscribe(
       (res) =>{
         console.log(res);
         // this.onClose();
